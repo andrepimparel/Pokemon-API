@@ -1,0 +1,16 @@
+<div class="container" [formGroup]="formGroup">
+    <h1>Pokemon Wiki</h1>
+    <hr>
+    <input 
+        class="w-100"
+        type="text"
+        formControlName="filter"
+        placeholder="Pikachu"
+        (input)="filtering($event)">
+
+    <div class="row">
+        <div *ngFor="let pokemon of pokemons" class="col-xl-4 col-sm-6 col-xs-12">
+
+        </div>
+    </div>
+</div>
