@@ -10,6 +10,7 @@ export interface Stats {
 export interface Pokemon {
     name: string;
     id: number;
+    stringId: string;
     types: string[];
     img: string;
     stats: Stats;

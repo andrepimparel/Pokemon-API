@@ -7,10 +7,9 @@
         formControlName="filter"
         placeholder="Pikachu"
         (input)="filtering($event)">
-
-    <div class="row">
+    <div class="row mt-5">
         <div *ngFor="let pokemon of pokemons" class="col-xl-4 col-sm-6 col-xs-12">
-
+            <app-card [pokemon]="pokemon"></app-card>
         </div>
     </div>
 </div>

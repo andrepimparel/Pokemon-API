@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ApiService } from '../shared/api.service';
-import { Pokemon } from './pokemon.model';
+import { ApiService } from '../../shared/services/api.service';
+import { Pokemon } from '../../shared/models/pokemon.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,16 +9,15 @@ import { Observable } from 'rxjs';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
 
   private api = inject(ApiService);
-  pokemons!: any
+  pokemons: Pokemon[] | undefined;
+  pokemonsCopy: Pokemon[]  | undefined;
 
-  constructor(){
+  ngOnInit(){
     this.pokemons = this.api.getData()
-    
-
-    console.log(this.pokemons)
+    this.pokemonsCopy = this.pokemons
   }
 
   formGroup: FormGroup = new FormGroup({
@@ -28,7 +27,10 @@ export class MainPageComponent {
   filtering(event: any){
     const search: string = event.target.value;
     console.log({search});
-    // TODO Filter
+    
+    this.pokemons = this.pokemonsCopy?.filter(({name}: Pokemon )=> {
+      return name.toLowerCase().includes(search.toLowerCase())
+    })
   }
 
 }
